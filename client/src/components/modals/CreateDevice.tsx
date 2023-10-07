@@ -3,6 +3,7 @@ import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../..";
 import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
+import {DevicesType} from "../../store/DeviceStore";
 
 type InfoType = {
     title: string;
@@ -45,7 +46,7 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append("price", `${price}`);
         if (file) formData.append("img", file);
         if (device.SelectedBrand !== null) formData.append("brandId", `${device.SelectedBrand.id}`);
-        if (device.SelectedType !== null) formData.append("brandId", `${device.SelectedType.id}`);
+        if (device.SelectedType !== null) formData.append("typeId", `${device.SelectedType.id}`);
         formData.append("info", JSON.stringify(info));
         createDevice(formData).then(() => onHide());
     };
